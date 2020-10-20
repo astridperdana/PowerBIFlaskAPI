@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Baraint App</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <link rel="icon" href="https://www.vippng.com/png/full/8-80252_internet-png-samsung-internet-icon.png"
+        type="image/x-icon">
+
+</head>
+
+<body>
+    <script language='javascript'>
+        $(document).ready(function () {
+            $('.ui.accordion').accordion();
+        });
+    </script>
+
+
+    <div class="ui pointing menu" style="margin: 20px;">
+        <a class="active item">
+            Input Data
+        </a>
+        <a class="item" href="{{url_for('json_api')}}">
+            API
+        </a>
+        <div class="right menu">
+            <div class="item">
+                <div class="ui transparent icon input">
+                    <input type="text" placeholder="Search...">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin:30px">
+        <div class="ui styled fluid accordion">
+
+            
+            <div class="title">
+                <i class="dropdown icon"></i>
+                Upload data
+            </div>
+            <div class="content" style="padding-left: 20 px;">
+                <p>Contoh format dokumen: <a href="{{url_for('static', filename='Cash_In.csv')}}">disini</a></p>
+
+                <form method="POST" action="" enctype="multipart/form-data">
+                    <p><input type="file"  name="file"></p>
+                    <p><input type="submit"  value="Submit"></p>
+                </form>
+            </div>      
+            <div class="active title">
+                <i class="dropdown icon"></i>
+                Seluruh Data
+            </div>
+            <div class="active content">
+                <table class="ui celled table">
+                    <thead>
+                        <tr>
+                            <th>Divisi</th>
+                            <th>Customer</th>
+                            <th>Tanggal</th>
+                            <th>Jumlah Aktual</th>
+                            <th>Jumlah Planing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for i in listi:%}
+                        <tr>
+                            <td data-label="Divisi">{{i[0]}}</td>
+                            <td data-label="Customer">{{i[1]}}</td>
+                            <td data-label="Tanggal">{{i[2]}}</td>
+                            <td data-label="Aktual">{{i[3]}}</td>
+                            <td data-label="Plan">{{i[4]}}</td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                    <tfoot>
+                        <tr><th colspan="5">
+                          <div class="ui right floated pagination menu">
+                            <a class="icon item" href="{{url_for('home', counter=counter-1)}}">
+                              <i class="left chevron icon"></i>
+                            </a>
+                            <a class="active item">{{counter}}</a>
+                            <a class="icon item" href="{{url_for('home', counter=counter+1)}}">
+                              <i class="right chevron icon"></i>
+                            </a>
+                          </div>
+                        </th>
+                      </tr></tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
